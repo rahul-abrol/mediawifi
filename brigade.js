@@ -24,9 +24,9 @@ class JobFactory {
     "sleep 60",
     "docker images",
     "cd src",
-    "docker build -t $ACRREG/wo-gateway:"+imageTag+" .",
+    "docker build -t $ACRREG/mediwiki:"+imageTag+" .",
     "docker login $ACRREG -u $DOCKER_USER -p $DOCKER_PASS",
-    "docker push $ACRREG/wo-gateway:"+imageTag+""
+    "docker push $ACRREG/mediwiki:"+imageTag+""
   ]
     return dockerBuild;
 
@@ -56,7 +56,7 @@ class JobFactory {
         `mv linux-amd64/helm /usr/local/bin/helm`,
         `cd src`,
         `az login --service-principal -u ${azServicePrincipal} -p ${azClientSecret} --tenant ${azTenant}`,
-        `helm upgrade --install wo-gateway ./helm/wo-gateway --set image.repository=${acrServer}/${image} --set image.tag=${imageTag} --namespace ${helmReleaseNamespace}`
+        `helm upgrade --install mediwiki ./helm/mediwiki --set image.repository=${acrServer}/${image} --set image.tag=${imageTag} --namespace ${helmReleaseNamespace}`
     ]
 return acr;
 }
